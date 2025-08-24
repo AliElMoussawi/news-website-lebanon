@@ -1,0 +1,96 @@
+/* app/globals.css or styles/globals.css */
+
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f9f9f9;
+    color: #333;
+  }
+  
+  main {
+    max-width: 900px;
+    margin: auto;
+    padding: 20px;
+  }
+  
+  h1, h2 {
+    color: #222;
+  }
+  
+  footer {
+    margin-top: 40px;
+    font-size: 14px;
+    color: #666;
+    text-align: center;
+  }
+  .header {
+    background: #c00;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .logo-img {
+    height: 60px;
+  }
+  .nav a {
+    margin: 0 10px;
+    color: white;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  .footer {
+    background: #222;
+    color: #ccc;
+    text-align: center;
+    padding: 15px;
+    margin-top: 40px;
+  }
+/* app/globals.css */
+
+.site-header {
+    background: #c00;
+    color: #fff;
+    padding-block: 14px;
+  }
+  
+  .header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; 
+    gap: 20px;
+  }
+  
+  /* Logo & clock stay on the right (RTL) */
+  .logo-clock {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  /* Navbar styles */
+  .nav {
+    display: flex;
+    gap: 18px;
+    flex-wrap: wrap;
+    align-items: center;
+  }
+  
+  .nav-link {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 18px;
+    transition: color 0.2s ease;
+  }
+  
+  .nav-link:hover {
+    color: #ffea00;
+  }
+  
+  .clock-wrapper {
+    margin-inline-start: 16px;
+  }
+  
