@@ -7,17 +7,28 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Visit {
-  id        Int      @id @default(autoincrement())
-  ip        String
-  city      String?
-  region    String?
-  country   String?
-  userAgent String?  @map("user_agent")
-  platform  String?
-  latitude  Float?
-  longitude Float?
-  createdAt DateTime @default(now()) @map("created_at")
 
+model Visit {
+  id                String   @id @default(cuid())
+  createdAt         DateTime @default(now())
+
+  ip                String
+  clientIpReported  String?
+  city              String?
+  region            String?
+  country           String?
+
+  userAgent         String?
+  platform          String?
+  device            String?
+  latitude          Float?
+  longitude         Float?
+
+  timezone          String?
+  asn               String?
+  org               String?
+  network           String?
+
+  geoRaw            Json?
   @@map("visits")
 }

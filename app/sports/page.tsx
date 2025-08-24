@@ -1,148 +1,51 @@
-"use client";
+// app/sports/page.tsx
+"use client"; // keep if you had client-only CSS/behavior; otherwise you can remove
+import Image from "next/image";
+
 export default function SportsPage() {
   return (
-    <main className="sports-container" dir="rtl">
-      <h1 className="page-title">🏆 الأخبار الرياضية</h1>
+    <main className="container" dir="rtl">
+      <h1>الأخبار الرياضية</h1>
 
-      {/* Featured News */}
-      <section className="featured">
-        <img
+      <section style={{ background: "#fff", borderRadius: 8, overflow: "hidden", boxShadow: "0 2px 6px rgba(0,0,0,.1)", marginBottom: 24 }}>
+        <Image
           src="https://picsum.photos/1000/500?sports"
-          alt="الخبر الرئيسي"
-          className="featured-img"
+          alt="الخبر الرياضي الرئيسي"
+          width={1000}
+          height={500}
+          sizes="(max-width: 1000px) 100vw, 1000px"
+          style={{ width: "100%", height: "auto" }}
+          priority
         />
-        <div className="featured-text">
-          <h2>منتخب لبنان يحقق فوزاً تاريخياً في التصفيات</h2>
-          <p>
-            حقق المنتخب اللبناني انتصاراً كبيراً على خصمه الآسيوي بنتيجة 3-1،
-            مما عزز فرصه في التأهل إلى كأس آسيا. الجماهير احتفلت بهذا الفوز
-            التاريخي الذي أعاد الأمل لكرة القدم اللبنانية.
-          </p>
+        <div style={{ padding: 16 }}>
+          <h2>منتخب لبنان يحقق فوزاً تاريخياً</h2>
+          <p>نتائج المباريات، انتقالات اللاعبين، وتحليلات حصرية...</p>
         </div>
       </section>
 
-      {/* Articles Grid */}
-      <section className="articles-grid">
-        <article className="article">
-          <img
-            src="https://picsum.photos/600/300?match"
-            alt="مباراة الدوري"
-            className="article-img"
-          />
-          <h3>الدوري اللبناني يشهد صراعاً مثيراً</h3>
-          <p>
-            الأندية اللبنانية تخوض مباريات قوية ضمن منافسات الدوري المحلي، حيث
-            يشهد الموسم الحالي تنافساً محموماً بين الفرق الكبرى.
-          </p>
-        </article>
-
-        <article className="article">
-          <img
-            src="https://picsum.photos/600/300?transfer"
-            alt="انتقالات"
-            className="article-img"
-          />
-          <h3>انتقالات اللاعبين: صفقات نارية تلوح في الأفق</h3>
-          <p>
-            أندية أوروبية كبرى تقترب من ضم نجوم لامعين في صفقات ضخمة ستغير ملامح
-            سوق الانتقالات الصيفي.
-          </p>
-        </article>
-
-        <article className="article">
-          <img
-            src="https://picsum.photos/600/300?analysis"
-            alt="تحليل مباراة"
-            className="article-img"
-          />
-          <h3>تحليل: نقاط القوة والضعف في أداء المنتخب</h3>
-          <p>
-            خبراء يقدمون تحليلاً شاملاً لأداء المنتخب الوطني خلال المباريات
-            الأخيرة، مع التركيز على التكتيكات الدفاعية والهجومية.
-          </p>
-        </article>
-
-        <article className="article">
-          <img
-            src="https://picsum.photos/600/300?trophy"
-            alt="كأس العالم"
-            className="article-img"
-          />
-          <h3>العد التنازلي لكأس العالم 2026</h3>
-          <p>
-            المنتخبات العالمية تبدأ استعداداتها المبكرة للبطولة الأكبر في العالم،
-            وسط توقعات بمنافسة شرسة بين كبار الكرة.
-          </p>
-        </article>
+      <section style={{ display: "grid", gap: 16, gridTemplateColumns: "repeat(auto-fit,minmax(280px,1fr))" }}>
+        {[
+          { q: "match", t: "الدوري يشهد صراعاً مثيراً" },
+          { q: "transfer", t: "صفقات انتقال نارية" },
+          { q: "analysis", t: "تحليل الأداء والتكتيك" },
+          { q: "trophy", t: "العد التنازلي للبطولات" },
+        ].map((a) => (
+          <article key={a.q} style={{ background: "#fff", borderRadius: 8, overflow: "hidden", boxShadow: "0 1px 4px rgba(0,0,0,.1)" }}>
+            <Image
+              src={`https://picsum.photos/600/300?${a.q}`}
+              alt={a.t}
+              width={600}
+              height={300}
+              sizes="(max-width: 600px) 100vw, 600px"
+              style={{ width: "100%", height: "auto" }}
+            />
+            <div style={{ padding: 12 }}>
+              <h3 style={{ margin: "8px 0", color: "#c00" }}>{a.t}</h3>
+              <p style={{ margin: 0, lineHeight: 1.8 }}>تفاصيل وتحليلات شاملة حول آخر التطورات...</p>
+            </div>
+          </article>
+        ))}
       </section>
-
-      {/* CSS */}
-      <style jsx>{`
-        .sports-container {
-          max-width: 1200px;
-          margin: auto;
-          padding: 20px;
-          font-family: Tahoma, sans-serif;
-          color: #333;
-        }
-        .page-title {
-          text-align: center;
-          font-size: 32px;
-          margin-bottom: 30px;
-          color: #c00;
-        }
-        .featured {
-          background: #fff;
-          border-radius: 8px;
-          overflow: hidden;
-          box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
-          margin-bottom: 40px;
-        }
-        .featured-img {
-          width: 100%;
-          height: auto;
-          border-bottom: 2px solid #eee;
-        }
-        .featured-text {
-          padding: 20px;
-        }
-        .featured-text h2 {
-          margin-top: 0;
-          font-size: 24px;
-          color: #222;
-        }
-        .articles-grid {
-          display: grid;
-          grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-          gap: 20px;
-        }
-        .article {
-          background: #fff;
-          border-radius: 8px;
-          overflow: hidden;
-          box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);
-          transition: transform 0.2s;
-          padding-bottom: 10px;
-        }
-        .article:hover {
-          transform: translateY(-5px);
-        }
-        .article-img {
-          width: 100%;
-          height: auto;
-          border-bottom: 2px solid #eee;
-        }
-        .article h3 {
-          margin: 15px;
-          font-size: 20px;
-          color: #c00;
-        }
-        .article p {
-          margin: 0 15px 10px;
-          font-size: 15px;
-          line-height: 1.7;
-        }
-      `}</style>
     </main>
   );
 }
