@@ -7,6 +7,7 @@ import Image from "next/image";
 import styles from "./home.module.css";
 import { articles } from "./lib/articles";
 import HypeBanner from "./components/HypeBanner";
+import NewsFeed from "./components/NewsFeed";
 
 // Typed payload we send to /api/log
 type LogPayload = {

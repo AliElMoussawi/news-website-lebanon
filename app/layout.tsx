@@ -12,7 +12,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html dir="rtl">
+    <html lang="ar" dir="rtl" suppressHydrationWarning>
       <body dir="rtl">
         <header className="site-header">
           <div className="container header-content">

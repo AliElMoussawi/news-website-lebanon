@@ -1,6 +1,20 @@
 import { NextResponse } from "next/server";
 import { XMLParser } from "fast-xml-parser";
 
+type RawRssItem = {
+  title: string;
+  link: string;
+  pubDate?: string;
+  description?: string;
+};
+
+type NewsItem = {
+  title: string;
+  link: string;
+  date: Date;
+  source: string;
+};
+
 export async function GET() {
   try {
     const feeds = [
@@ -9,7 +23,7 @@ export async function GET() {
     ];
 
     const parser = new XMLParser();
-    const allItems: any[] = [];
+    const allItems: NewsItem[] = [];
 
     // Fetch both feeds in parallel
     await Promise.all(
@@ -20,13 +34,14 @@ export async function GET() {
             const xml = await res.text();
             const parsed = parser.parse(xml);
 
-            const items = parsed.rss?.channel?.item || [];
-            items.forEach((item: any) => {
+            const items = (parsed.rss?.channel?.item || []) as RawRssItem[];
+            const source = parsed.rss?.channel?.title || "مصدر غير معروف";
+            items.forEach((item) => {
               allItems.push({
                 title: item.title,
                 link: item.link,
                 date: new Date(item.pubDate || Date.now()),
-                source: parsed.rss?.channel?.title || "مصدر غير معروف",
+                source: source,
               });
             });
           }

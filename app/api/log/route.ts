@@ -26,6 +26,7 @@ function ipFromHeaders(req: NextRequest): string {
   return "0.0.0.0";
 }
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 function isPrivate(ip: string) {
   if (!ip) return true;
   if (ip === "0.0.0.0" || ip === "::1" || ip.startsWith("127.")) return true;
