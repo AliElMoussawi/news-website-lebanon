@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/app/lib/prisma";
 import type { Prisma } from "@prisma/client";
 import { GeoApiResponse } from "../geo.types";
+import { v4 as uuidv4 } from "uuid";
 
 export const runtime = "nodejs";
 export const preferredRegion = "fra1";
@@ -9,10 +10,10 @@ export const preferredRegion = "fra1";
 interface LogPayload {
   userAgent: string;
   platform: string;
-  device?: string;       // 👈 NEW
+  device?: string;
   latitude?: number;
   longitude?: number;
-  clientIp?: string;     // ipify
+  clientIp?: string;
 }
 
 function ipFromHeaders(req: NextRequest): string {
@@ -26,24 +27,18 @@ function ipFromHeaders(req: NextRequest): string {
   return "0.0.0.0";
 }
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-function isPrivate(ip: string) {
-  if (!ip) return true;
-  if (ip === "0.0.0.0" || ip === "::1" || ip.startsWith("127.")) return true;
-  if (ip.startsWith("10.") || ip.startsWith("192.168.")) return true;
-  if (ip.startsWith("172.")) {
-    const sec = Number(ip.split(".")[1]);
-    if (sec >= 16 && sec <= 31) return true;
-  }
-  return false;
-}
-
 export async function POST(req: NextRequest) {
   const body = (await req.json().catch(() => ({}))) as Partial<LogPayload>;
   const { userAgent = "", platform = "", device, latitude, longitude, clientIp } = body;
 
+  // ✅ Ensure deviceId cookie
+  let deviceId = req.cookies.get("device_id")?.value;
+  if (!deviceId) {
+    deviceId = uuidv4().toString();
+  }
+
   const serverIp = ipFromHeaders(req);
-  const lookupIp = clientIp??serverIp
+  const lookupIp = clientIp ?? serverIp;
 
   let geoData: GeoApiResponse | null = null;
   if (lookupIp) {
@@ -63,16 +58,15 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // prefer client GPS if provided; else fall back to GeoIP coords
   const finalLat = typeof latitude === "number" ? latitude : geoData?.latitude ?? null;
   const finalLng = typeof longitude === "number" ? longitude : geoData?.longitude ?? null;
 
-  // JSON-safe copy for Prisma
   const geoJson: Prisma.InputJsonValue =
     geoData ? (JSON.parse(JSON.stringify(geoData)) as Prisma.InputJsonValue) : ({} as Prisma.InputJsonValue);
 
   const visit = await prisma.visit.create({
     data: {
+      UUID: deviceId, // ✅ store the deviceId in yDBour 
       ip: serverIp,
       clientIpReported: clientIp ?? null,
 
@@ -96,5 +90,17 @@ export async function POST(req: NextRequest) {
     },
   });
 
-  return NextResponse.json({ visit, geoRaw: geoData });
+  // ✅ Always return cookie (set if missing)
+  const res = NextResponse.json({ visit, geoRaw: geoData });
+  if (!req.cookies.get("device_id")) {
+    res.cookies.set("device_id", deviceId, {
+      httpOnly: true,
+      sameSite: "lax",
+      secure: process.env.NODE_ENV === "production",
+      maxAge: 60 * 60 * 24 * 365 * 5, // 5 years
+      path: "/",
+    });
+  }
+
+  return res;
 }

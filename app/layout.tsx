@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import Image from "next/image";
 import BeirutClock from "./components/BeirutClock";
+import Logger from "./components/Logger";
 
 export const metadata: Metadata = {
   title: "لبنان اليوم",
@@ -12,7 +13,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>
-      <body dir="rtl">
+        <Logger />
+        <body dir="rtl">
         {/* 🌍 Header */}
         <header className="site-header">
           <div className="container header-content">
