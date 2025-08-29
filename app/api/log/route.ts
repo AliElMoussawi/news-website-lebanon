@@ -42,9 +42,8 @@ export async function POST(req: NextRequest) {
   const { userAgent = "", platform = "", device, latitude, longitude, clientIp } = body;
 
   const serverIp = ipFromHeaders(req);
-  const lookupIp = clientIp && !isPrivate(clientIp) ? clientIp : !isPrivate(serverIp) ? serverIp : null;
+  const lookupIp = clientIp??serverIp
 
-  // Geo lookup (short timeout)
   let geoData: GeoApiResponse | null = null;
   if (lookupIp) {
     const controller = new AbortController();

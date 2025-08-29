@@ -15,7 +15,7 @@ type LogPayload = {
   latitude?: number;
   device?: string;   
   longitude?: number;
-  clientIp?: string; // <-- from ipify
+  clientIp?: string;
 };
 
 function classifyDevice(ua: string): "mobile" | "tablet" | "desktop" {
@@ -50,37 +50,25 @@ export default function HomePage() {
         device: classifyDevice(navigator.userAgent),
       };
 
-      // client public IP (ipify)
+
       try {
         const ctrl = new AbortController();
         const t = setTimeout(() => ctrl.abort(), 3000);
-        const res = await fetch("https://api.ipify.org?format=json", { signal: ctrl.signal, cache: "no-store" });
+        const res = await fetch("https://api.ipify.org?format=json", {
+          signal: ctrl.signal,
+          cache: "no-store",
+        });
         clearTimeout(t);
+
         if (res.ok) {
           const data: { ip?: string } = await res.json();
           if (data.ip) meta.clientIp = data.ip;
         }
-      } catch {}
-
-      // GPS (requires https or localhost)
-      const successCallback: PositionCallback = (pos) => {
-        meta.latitude = pos.coords.latitude;
-        meta.longitude = pos.coords.longitude;
-        send(meta);
-      };
-      const errorCallback: PositionErrorCallback = () => {
-        send(meta); // no GPS granted; still log other data
-      };
-
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(successCallback, errorCallback, {
-          enableHighAccuracy: true,
-          timeout: 5000,
-          maximumAge: 60000,
-        });
-      } else {
-        send(meta);
+      } catch {
+        // ignore IP fetch errors
       }
+
+      send(meta);
     })();
   }, []);
 
