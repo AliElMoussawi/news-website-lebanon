@@ -1,0 +1,47 @@
+.container {
+    margin-top: 2rem;
+    padding: 1rem;
+    background: #fdfdfd;
+    border: 1px solid #ddd;
+    border-radius: 12px;
+  }
+  
+  .heading {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+    color: #222;
+    font-weight: bold;
+  }
+  
+  .grid {
+    display: grid;
+    gap: 1rem;
+  }
+  
+  .card {
+    display: block;
+    padding: 1rem;
+    border-radius: 8px;
+    background: #fff;
+    border: 1px solid #eee;
+    transition: background 0.2s, transform 0.2s;
+    text-decoration: none;
+    color: #222;
+  }
+  
+  .card:hover {
+    background: #f9f9f9;
+    transform: translateY(-2px);
+  }
+  
+  .card h3 {
+    margin: 0 0 0.5rem;
+    font-size: 1rem;
+    line-height: 1.4;
+  }
+  
+  .meta {
+    font-size: 0.85rem;
+    color: #666;
+  }
+  

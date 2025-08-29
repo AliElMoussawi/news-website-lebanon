@@ -1,7 +1,103 @@
-.container { max-width: 1200px; margin: 24px auto; padding: 0 16px; }
-.title { text-align: center; color: #c00; font-size: 28px; margin-bottom: 16px; }
-.grid { list-style: none; padding: 0; margin: 0; display: grid; grid-template-columns: repeat(auto-fit,minmax(260px,1fr)); gap: 16px; }
-.card { background: #fff; border-radius: 8px; box-shadow: 0 1px 6px rgba(0,0,0,.08); overflow: hidden; }
-.link { display: block; text-decoration: none; color: inherit; }
-.link h3 { margin: 12px 12px 6px; color: #c00; font-size: 18px; }
-.link p { margin: 0 12px 14px; line-height: 1.8; font-size: 15px; }
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 2rem 1rem;
+  }
+  
+  .hero {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  
+  .title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin: 0;
+    color: #222;
+  }
+  
+  .subtitle {
+    font-size: 1.2rem;
+    color: #666;
+    margin-top: 0.5rem;
+  }
+  
+  .grid {
+    display: grid;
+    gap: 2rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    list-style: none;
+    padding: 0;
+  }
+  
+  .card {
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #eee;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .link {
+    text-decoration: none;
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
+  
+  .imageWrapper {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+  }
+  
+  .image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s;
+  }
+  
+  .card:hover .image {
+    transform: scale(1.05);
+  }
+  
+  .content {
+    padding: 1rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+  
+  .cardTitle {
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin: 0 0 0.5rem;
+    color: #111;
+    line-height: 1.4;
+  }
+  
+  .excerpt {
+    flex-grow: 1;
+    font-size: 0.95rem;
+    color: #555;
+    margin: 0 0 1rem;
+  }
+  
+  .readMore {
+    font-size: 0.9rem;
+    font-weight: bold;
+    color: #0070f3;
+    transition: color 0.2s;
+  }
+  
+  .readMore:hover {
+    color: #0051a3;
+  }
+  

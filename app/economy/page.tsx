@@ -1,4 +1,5 @@
 "use client";
+import { goldArticle } from "../articles/gold-prices-record-high";
 import ArticleCard from "../components/ArticleCard";
 import FeaturedArticle from "../components/FeaturedArticle";
 import styles from "./page.module.css";
@@ -11,10 +12,11 @@ export default function EconomyPage() {
 
       {/* Featured */}
       <FeaturedArticle
-        slug="gold-prices-record-high"            // ✅ add slug
+        slug="gold-prices-record-high"
         title="أسعار الذهب العالمية: تحليل شامل وتاريخ ممتد"
         image="https://picsum.photos/1000/500?gold"
-        content="الذهب يُعتبر منذ آلاف السنين أحد أهم المعادن النفيسة وأكثرها ارتباطاً بالقيمة والثروة. وما زال يلعب دوراً محورياً في حماية المستثمرين من التقلبات الاقتصادية..."
+        content={goldArticle}
+        full={true}
       />
 
       {/* Articles Grid */}

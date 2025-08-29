@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from "react";
 import Link from "next/link";
+import styles from "./NewsFeed.module.css"; // 👈 add styles
 
 type NewsItem = {
   title: string;
@@ -12,8 +13,8 @@ type NewsItem = {
 
 export default function NewsFeed() {
   const [news, setNews] = useState<NewsItem[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  // function to fetch news
   const fetchNews = async () => {
     try {
       const res = await fetch("/api/news", { cache: "no-store" });
@@ -23,37 +24,33 @@ export default function NewsFeed() {
       }
     } catch {
       setNews([]);
+    } finally {
+      setLoading(false);
     }
   };
 
   useEffect(() => {
-    // fetch on mount
     fetchNews();
-
-    // refresh every 5 minutes
-    const interval = setInterval(fetchNews, 5 * 60 * 1000);
-
-    // cleanup
+    const interval = setInterval(fetchNews, 5 * 60 * 1000); // refresh every 5 min
     return () => clearInterval(interval);
   }, []);
 
-  if (news.length === 0) {
-    return null; // don’t render if no news
-  }
+  if (loading) return <p>⏳ جاري تحميل الأخبار...</p>;
+  if (news.length === 0) return <p>⚠️ لا توجد أخبار متاحة حالياً</p>;
 
   return (
-    <section>
-      <h2>🗞️ الأخبار العالمية </h2>
-      <ul>
+    <section className={styles.container}>
+      <h2 className={styles.heading}>🗞️ الأخبار العالمية</h2>
+      <div className={styles.grid}>
         {news.map((item, i) => (
-          <li key={i}>
-            <Link href={item.link} target="_blank">
-              {item.title}
-            </Link>{" "}
-            <small>({item.source})</small>
-          </li>
+          <Link href={item.link} target="_blank" key={i} className={styles.card}>
+            <h3>{item.title}</h3>
+            <p className={styles.meta}>
+              {item.source} • {item.date ? new Date(item.date).toLocaleDateString("ar-EG") : ""}
+            </p>
+          </Link>
         ))}
-      </ul>
+      </div>
     </section>
   );
 }

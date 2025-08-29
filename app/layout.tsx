@@ -1,4 +1,3 @@
-// app/layout.tsx
 import "./globals.css";
 import type { Metadata } from "next";
 import Link from "next/link";
@@ -14,19 +13,23 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>
       <body dir="rtl">
+        {/* 🌍 Header */}
         <header className="site-header">
           <div className="container header-content">
-            <div className="logo-clock">
-              <Image
-                src="/logo.svg"
-                alt="لبنان اليوم"
-                className="logo-img"
-                width={140}
-                height={56}
-                priority
-              />
+            <div className="logo-wrapper">
+              <Link href="/">
+                <Image
+                  src="/logo.svg"
+                  alt="لبنان اليوم"
+                  className="logo-img"
+                  width={160}
+                  height={60}
+                  priority
+                />
+              </Link>
             </div>
 
+            {/* Navigation */}
             <nav className="nav">
               <Link className="nav-link" href="/">الرئيسية</Link>
               <Link className="nav-link" href="/politics">سياسة</Link>
@@ -35,17 +38,26 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link className="nav-link" href="/tech">تقنية</Link>
               <Link className="nav-link" href="/world">عالم</Link>
             </nav>
+
+            {/* Clock */}
+            <div className="clock-wrapper">
+              <BeirutClock />
+            </div>
           </div>
         </header>
-              <div className="clock-wrapper">
-                <BeirutClock />
-              </div>
 
-        {children}
+        {/* Main content */}
+        <main className="main-content">{children}</main>
 
+        {/* Footer */}
         <footer className="site-footer">
-          <div className="container">
-            <p>© 2025 لبنان اليوم - جميع الحقوق محفوظة</p>
+          <div className="container footer-content">
+            <p>© {new Date().getFullYear()} لبنان اليوم - جميع الحقوق محفوظة</p>
+            <nav className="footer-nav">
+              <Link href="/about">من نحن</Link>
+              <Link href="/contact">اتصل بنا</Link>
+              <Link href="/privacy">سياسة الخصوصية</Link>
+            </nav>
           </div>
         </footer>
       </body>

@@ -1,96 +1,111 @@
-/* app/globals.css or styles/globals.css */
+/* General */
+body {
+  margin: 0;
+  font-family: "Tajawal", "Cairo", sans-serif;
+  background: #f4f4f4; /* soft grey background */
+  color: #222;
+  line-height: 1.6;
+}
 
-html, body {
-    margin: 0;
-    padding: 0;
-    font-family: Arial, sans-serif;
-    background-color: #f9f9f9;
-    color: #333;
-  }
-  
-  main {
-    max-width: 900px;
-    margin: auto;
-    padding: 20px;
-  }
-  
-  h1, h2 {
-    color: #222;
-  }
-  
-  footer {
-    margin-top: 40px;
-    font-size: 14px;
-    color: #666;
-    text-align: center;
-  }
-  .header {
-    background: #c00;
-    color: white;
-    padding: 15px 20px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .logo-img {
-    height: 60px;
-  }
-  .nav a {
-    margin: 0 10px;
-    color: white;
-    text-decoration: none;
-    font-weight: bold;
-  }
-  .footer {
-    background: #222;
-    color: #ccc;
-    text-align: center;
-    padding: 15px;
-    margin-top: 40px;
-  }
-/* app/globals.css */
-
+/* Header */
 .site-header {
-    background: #c00;
-    color: #fff;
-    padding-block: 14px;
-  }
-  
-  .header-content {
-    display: flex;
-    align-items: center;
-    justify-content: space-between; 
-    gap: 20px;
-  }
-  
-  /* Logo & clock stay on the right (RTL) */
-  .logo-clock {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-  }
-  
-  /* Navbar styles */
-  .nav {
-    display: flex;
-    gap: 18px;
-    flex-wrap: wrap;
-    align-items: center;
-  }
-  
-  .nav-link {
-    color: #fff;
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 18px;
-    transition: color 0.2s ease;
-  }
-  
-  .nav-link:hover {
-    color: #ffea00;
-  }
-  
-  .clock-wrapper {
-    margin-inline-start: 16px;
-  }
-  
+  background: #eaeaea; /* light grey header */
+  border-bottom: 2px solid #0077b6; /* calm blue accent line */
+  position: sticky;
+  top: 0;
+  z-index: 50;
+}
+
+.header-content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.logo-wrapper {
+  flex-shrink: 0;
+}
+
+.nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.nav-link {
+  font-weight: 500;
+  font-size: 1rem;
+  color: #333;
+  text-decoration: none;
+  transition: color 0.2s, border-bottom 0.2s;
+  padding-bottom: 2px;
+  border-bottom: 2px solid transparent;
+}
+
+.nav-link:hover {
+  color: #0077b6;
+  border-bottom: 2px solid #0077b6;
+}
+
+.clock-wrapper {
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #555;
+}
+
+/* Main */
+.main-content {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 0 1rem;
+}
+
+/* Example article/news card sections */
+.section {
+  background: #fff;
+  border-radius: 12px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+}
+
+/* Footer */
+.site-footer {
+  background: #333; /* dark footer */
+  color: #f4f4f4;
+  padding: 1.5rem 1rem;
+  margin-top: 2rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.footer-content p {
+  margin: 0;
+  color: #ddd;
+  font-size: 0.9rem;
+}
+
+.footer-nav {
+  display: flex;
+  gap: 1.5rem;
+}
+
+.footer-nav a {
+  color: #66b2ff; /* softer blue for footer links */
+  font-size: 0.9rem;
+  text-decoration: none;
+}
+
+.footer-nav a:hover {
+  text-decoration: underline;
+  color: #fff;
+}

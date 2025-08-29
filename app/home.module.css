@@ -60,4 +60,25 @@
   .latest a:hover {
     text-decoration: underline;
   }
+  .layout {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  
+  /* Main column (articles) */
+  .main {
+    flex: 3; /* take more space */
+  }
+  
+  /* Sidebar (NewsFeed) */
+  .sidebar {
+    flex: 1; /* take smaller space */
+    background: #f8f8f8;
+    padding: 1rem;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    max-height: 100vh;
+    overflow-y: auto; /* scroll if too long */
+  }
   
