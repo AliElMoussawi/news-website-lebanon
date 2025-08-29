@@ -1,3 +1,5 @@
+import { goldArticle } from "../articles/gold-prices-record-high";
+
 // app/lib/articles.ts
 export type Category = "economy" | "politics" | "sports" | "tech" | "world";
 
@@ -14,7 +16,7 @@ export interface Article {
 
 export const articles: Article[] = [
   {
-    slug: "gold-prices-record-high",
+    slug: "الذهب-يسجل",
     title: "الذهب يسجل ارتفاعاً تاريخياً وسط تقلبات الأسواق العالمية",
     category: "economy",
     image: "https://picsum.photos/1000/500?gold",
@@ -22,9 +24,7 @@ export const articles: Article[] = [
     author: "فريق الاقتصاد",
     publishedAt: "2025-08-20T08:00:00Z",
     content: [
-      "يُعد الذهب من أهم الملاذات الآمنة في أوقات عدم اليقين الاقتصادي...",
-      "ويرى محللون أن تدفق الاستثمارات نحو المعادن النفيسة قد يستمر إذا بقي التضخم مرتفعاً...",
-      "على صعيد العملات، أدى تراجع الدولار إلى زيادة دعم أسعار الذهب...",
+      goldArticle
     ]
   },
   {

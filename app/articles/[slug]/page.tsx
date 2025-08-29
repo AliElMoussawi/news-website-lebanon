@@ -3,6 +3,7 @@ import { notFound } from "next/navigation";
 import Image from "next/image";
 import styles from "./page.module.css";
 import { articles, getArticle } from "../../lib/articles";
+import ReactMarkdown from "react-markdown";
 
 // In Next.js 15, params can be async -> await them.
 type ParamsPromise = Promise<{ slug: string }>;
@@ -22,9 +23,9 @@ export async function generateMetadata({ params }: { params: ParamsPromise }) {
   };
 }
 
-export default async function ArticlePage({ params }: { params: ParamsPromise }) {
-  const { slug } = await params;
-  const a = getArticle(slug);
+export default function ArticlePage({ params }: { params: { slug: string } }) {
+  const decodedSlug = decodeURIComponent(params.slug);
+  const a = getArticle(decodedSlug);
   if (!a) notFound();
 
   return (
@@ -52,9 +53,7 @@ export default async function ArticlePage({ params }: { params: ParamsPromise })
         />
 
         <div className={styles.content}>
-          {a.content.map((p, i) => (
-            <p key={i}>{p}</p>
-          ))}
+          <ReactMarkdown>{a.content.join("\n\n")}</ReactMarkdown>
         </div>
       </article>
     </main>
