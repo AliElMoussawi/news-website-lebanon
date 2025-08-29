@@ -3,6 +3,7 @@ import ArticleCard from "../components/ArticleCard";
 import FeaturedArticle from "../components/FeaturedArticle";
 import styles from "./page.module.css";
 
+
 export default function EconomyPage() {
   return (
     <main className={styles.container} dir="rtl">

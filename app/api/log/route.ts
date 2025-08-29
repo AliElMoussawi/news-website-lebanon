@@ -52,7 +52,7 @@ export async function POST(req: NextRequest) {
       const res = await fetch(`https://ipapi.co/${encodeURIComponent(lookupIp)}/json/`, {
         signal: controller.signal,
         cache: "no-store",
-        headers: { "User-Agent": "news-tracker/1.0", Accept: "application/json" },
+        headers: { "User-Agent": "lebanon-alyawm/1.0", Accept: "application/json" },
       });
       if (res.ok) geoData = (await res.json()) as GeoApiResponse;
     } catch {
