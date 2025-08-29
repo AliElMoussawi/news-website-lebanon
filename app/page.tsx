@@ -105,9 +105,9 @@ export default function HomePage() {
         </Link>
       </section>
 
-      {/* Latest */}
+      {/* Latest (your internal articles) */}
       <section className={styles.latest}>
-        <h2>📰 آخر الأخبار</h2>
+        <h2>📰 آخر الأخبار المحلية</h2>
         <ul>
           {latest.map((a) => (
             <li key={a.slug}>
@@ -119,6 +119,9 @@ export default function HomePage() {
           <Link href="/articles">عرض جميع المقالات</Link>
         </div>
       </section>
+
+      {/* 🌍 External News Feed */}
+      <NewsFeed />
     </div>
   );
 }
