@@ -4,6 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 import BeirutClock from "./components/BeirutClock";
 import Logger from "./components/Logger";
+import MobileNav from "./components/MobileNav";
 
 export const metadata: Metadata = {
   title: "لبنان اليوم",
@@ -32,7 +33,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             </div>
 
             {/* Navigation */}
-            <nav className="nav">
+            <nav className="desktop-nav">
               <Link className="nav-link" href="/">الرئيسية</Link>
               <Link className="nav-link" href="/politics">سياسة</Link>
               <Link className="nav-link" href="/economy">اقتصاد</Link>
@@ -41,10 +42,15 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link className="nav-link" href="/world">عالم</Link>
             </nav>
 
-            {/* Clock */}
-            <div className="clock-wrapper">
-              <BeirutClock />
+            {/* Mobile dropdown */}
+            <div className="mobile-nav">
+              <MobileNav />
             </div>
+            {/* Divider (only visible on mobile) */}
+            <div className="mobile-divider"></div>
+            {/* Clock */}
+            <div className="clock-wrapper"><BeirutClock /></div>
+
           </div>
         </header>
 

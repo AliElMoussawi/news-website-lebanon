@@ -23,8 +23,14 @@ export async function generateMetadata({ params }: { params: ParamsPromise }) {
   };
 }
 
-export default function ArticlePage({ params }: { params: { slug: string } }) {
-  const decodedSlug = decodeURIComponent(params.slug);
+export default async function ArticlePage({ params }: { params: Promise<{ slug: string | string[] }> }) {
+  // Await params
+  const resolvedParams = await params;
+  const slug = Array.isArray(resolvedParams.slug)
+    ? resolvedParams.slug.join("/")
+    : resolvedParams.slug;
+
+  const decodedSlug = decodeURIComponent(slug);
   const a = getArticle(decodedSlug);
   if (!a) notFound();
 

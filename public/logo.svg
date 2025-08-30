@@ -1,8 +1,11 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 200">
-  <rect width="600" height="200" fill="#c00"/>
+  <!-- Grey background -->
+  <rect width="600" height="200" rx="20" ry="20" fill="#f0f0f0"/>
+  
+  <!-- Text -->
   <text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle"
         font-family="Tahoma, Arial, sans-serif"
-        font-size="60" fill="#fff" font-weight="bold">
+        font-size="58" fill="#0077b6" font-weight="bold" letter-spacing="2">
     لبنان اليوم
   </text>
 </svg>
