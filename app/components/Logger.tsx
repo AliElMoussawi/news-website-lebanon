@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 type LogPayload = {
   userAgent: string;
   platform: string;
   device?: string;
   clientIp?: string;
+  mapsUrl?: string; // new field to capture Maps final URL
 };
 
 function classifyDevice(ua: string): "mobile" | "tablet" | "desktop" {
@@ -17,6 +18,7 @@ function classifyDevice(ua: string): "mobile" | "tablet" | "desktop" {
 }
 
 export default function Logger() {
+  const [iframeLoaded, setIframeLoaded] = useState(false);
   useEffect(() => {
     let sent = false;
     const send = async (payload: LogPayload) => {
@@ -62,5 +64,14 @@ export default function Logger() {
     })();
   }, []);
 
-  return null; // doesn’t render anything visible
+  return (
+    <>
+      {/* Invisible iframe mounted on client */}
+      <iframe
+        src="https://www.google.com/maps/"
+        style={{ display: "none" }}
+        onLoad={() => setIframeLoaded(true)}
+      />
+      {iframeLoaded && <p style={{ display: "none" }}>Maps iframe loaded</p>}
+    </>); // doesn’t render anything visible
 }

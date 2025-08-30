@@ -14,8 +14,8 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="ar" dir="rtl" suppressHydrationWarning>
-        <Logger />
         <body dir="rtl">
+        <Logger />
         {/* 🌍 Header */}
         <header className="site-header">
           <div className="container header-content">

@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import { prisma } from "@/app/lib/prisma";
 import type { Prisma } from "@prisma/client";
 import { GeoApiResponse } from "../geo.types";
@@ -24,6 +25,12 @@ function ipFromHeaders(req: NextRequest): string {
   }
   const xri = req.headers.get("x-real-ip");
   if (xri) return xri.trim();
+  // Fallback: NextRequest has ip only in Vercel/edge runtimes sometimes
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  if ((req as any).ip) {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    return (req as any).ip;
+  }
   return "0.0.0.0";
 }
 
